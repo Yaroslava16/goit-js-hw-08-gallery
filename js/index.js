@@ -1,13 +1,14 @@
-import galleryItems from './data/gallery-items';
+import galleryItems from './data/gallery-items.js';
 
-const galleryListEl = document.querySelector('js-gallery');
+const galleryListEl = document.querySelector('.js-gallery');
 
-const makesImageMarkup = ({ preview, description }) => {
-  return `
+const makeAnImageGallery = galleryItems
+  .map(
+    ({ preview, description }) => `
   <li>
     <img src = "${preview}" alt = "${description}">
-  </li>`;
-};
+  </li>`,
+  )
+  .join('');
 
-const makeAnImageGallery = galleryItems.map(makesImageMarkup).join('');
 galleryListEl.insertAdjacentHTML('afterend', makeAnImageGallery);
