@@ -6,7 +6,7 @@ const lightbox = document.querySelector('.js-lightbox');
 
 const closeModalBtn = document.querySelector('[data-action="close-lightbox"]');
 
-const modalImg = document.querySelector('lightbox__image');
+const modalImg = document.querySelector('.js-lightbox .lightbox__image');
 
 const makeAnImageGallery = galleryItems
   .map(
@@ -25,8 +25,12 @@ function onGalleriesImageClick(evt) {
   evt.preventDefault();
 
   const selectedEl = evt.target;
+  const selectedElData = selectedEl.dataset.source;
+
   if (selectedEl) {
     lightbox.classList.add('is-open');
+    modalImg.src = selectedElData;
+    modalImg.alt = selectedEl.alt;
   }
 
   if (!selectedEl.classList.contains('.gallery__image')) {
