@@ -8,6 +8,8 @@ const closeModalBtn = document.querySelector('[data-action="close-lightbox"]');
 
 const modalImg = document.querySelector('.js-lightbox .lightbox__image');
 
+const overleyModal = document.querySelector('.lightbox__overlay');
+
 const makeAnImageGallery = galleryItems
   .map(
     ({ preview, original, description }) => `
@@ -20,6 +22,8 @@ galleryListEl.insertAdjacentHTML('beforeend', makeAnImageGallery);
 galleryListEl.addEventListener('click', onGalleriesImageClick);
 
 closeModalBtn.addEventListener('click', onCloseModalbtn);
+
+overleyModal.addEventListener('click', onOverlayClickClose);
 
 function onGalleriesImageClick(evt) {
   evt.preventDefault();
@@ -39,5 +43,9 @@ function onGalleriesImageClick(evt) {
 }
 
 function onCloseModalbtn(evt) {
+  lightbox.classList.remove('is-open');
+}
+
+function onOverlayClickClose(evt) {
   lightbox.classList.remove('is-open');
 }
