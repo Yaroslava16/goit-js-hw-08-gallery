@@ -21,9 +21,9 @@ galleryListEl.insertAdjacentHTML('beforeend', makeAnImageGallery);
 
 galleryListEl.addEventListener('click', onGalleriesImageClick);
 
-closeModalBtn.addEventListener('click', onCloseModalbtn);
+closeModalBtn.addEventListener('click', onCloseModal);
 
-overleyModal.addEventListener('click', onOverlayClickClose);
+overleyModal.addEventListener('click', onCloseModal);
 
 function onGalleriesImageClick(evt) {
   evt.preventDefault();
@@ -32,6 +32,7 @@ function onGalleriesImageClick(evt) {
   const selectedElData = selectedEl.dataset.source;
 
   if (selectedEl) {
+    window.addEventListener('keydown', onEscKeyPress);
     lightbox.classList.add('is-open');
     modalImg.src = selectedElData;
     modalImg.alt = selectedEl.alt;
@@ -42,10 +43,13 @@ function onGalleriesImageClick(evt) {
   }
 }
 
-function onCloseModalbtn(evt) {
+function onCloseModal(evt) {
   lightbox.classList.remove('is-open');
+  modalImg.src = '';
 }
 
-function onOverlayClickClose(evt) {
-  lightbox.classList.remove('is-open');
+function onEscKeyPress(evt) {
+  if (evt.code === 'Escape') {
+    onCloseModal();
+  }
 }
