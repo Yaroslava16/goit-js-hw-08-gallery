@@ -2,6 +2,8 @@ import galleryItems from './data/gallery-items.js';
 
 const galleryListEl = document.querySelector('.js-gallery');
 
+const galleryImg = document.querySelectorAll('.gallery__image');
+
 const lightbox = document.querySelector('.js-lightbox');
 
 const closeModalBtn = document.querySelector('[data-action="close-lightbox"]');
@@ -26,12 +28,14 @@ closeModalBtn.addEventListener('click', onCloseModal);
 overleyModal.addEventListener('click', onCloseModal);
 
 function onGalleriesImageClick(e) {
-  // if (!selectedEl.classList.contains('.gallery__image')) {
-  //   return;
-  // }
   e.preventDefault();
+
   const selectedEl = e.target;
   let selectedElData = selectedEl.dataset.source;
+
+  if (!selectedEl.classList.contains('gallery__image')) {
+    return;
+  }
 
   lightbox.classList.add('is-open');
   modalImg.src = selectedElData;
